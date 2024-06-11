@@ -1,10 +1,10 @@
-package com.tui.proof.rest.controller;
+package com.tui.pilotes.rest.controller;
 
-import com.tui.proof.data.entity.Order;
-import com.tui.proof.rest.dto.request.OrderRequest;
-import com.tui.proof.rest.dto.response.CreateOrderResponse;
-import com.tui.proof.rest.dto.response.UpdateOrderResponse;
-import com.tui.proof.service.OrderService;
+import com.tui.pilotes.data.entity.Order;
+import com.tui.pilotes.rest.dto.request.OrderRequest;
+import com.tui.pilotes.rest.dto.response.CreateOrderResponse;
+import com.tui.pilotes.rest.dto.response.UpdateOrderResponse;
+import com.tui.pilotes.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

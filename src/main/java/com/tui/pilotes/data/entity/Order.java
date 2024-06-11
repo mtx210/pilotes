@@ -1,6 +1,6 @@
-package com.tui.proof.data.entity;
+package com.tui.pilotes.data.entity;
 
-import com.tui.proof.model.OrderType;
+import com.tui.pilotes.model.OrderType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

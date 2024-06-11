@@ -1,4 +1,4 @@
-package com.tui.proof.rest.dto.request;
+package com.tui.pilotes.rest.dto.request;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.tui.proof.exception;
+package com.tui.pilotes.exception;
 
 public class OrderUpdateTimedOutException extends RuntimeException {
 
