@@ -4,9 +4,9 @@ import com.tui.proof.data.entity.Order;
 import com.tui.proof.data.repository.OrderRepository;
 import com.tui.proof.exception.OrderUpdateTimedOutException;
 import com.tui.proof.model.OrderType;
-import com.tui.proof.rest.dto.request.CustomerSearchRequest;
 import com.tui.proof.rest.dto.request.OrderRequest;
 import com.tui.proof.rest.dto.response.CreateOrderResponse;
+import com.tui.proof.rest.dto.response.UpdateOrderResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +40,7 @@ public class OrderService {
         return new CreateOrderResponse(createdOrder.getOrderId());
     }
 
-    public Order updateOrder(Long orderId, OrderRequest orderRequest) {
+    public UpdateOrderResponse updateOrder(Long orderId, OrderRequest orderRequest) {
         validateRequest(orderRequest);
 
         Order order = orderRepository.findById(orderId)
@@ -51,16 +51,17 @@ public class OrderService {
         }
 
         updateEntity(order, orderRequest);
-        return orderRepository.save(order);
+        orderRepository.save(order);
+        return new UpdateOrderResponse();
     }
 
-    public List<Order> getOrders(CustomerSearchRequest customerSearchRequest) {
-        validateRequest(customerSearchRequest);
+    public List<Order> getOrders(String name, String surname, String phone) {
+        validateRequest(name, surname, phone);
 
         return orderRepository.findAll(Example.of(Order.builder()
-                .customerFirstName(customerSearchRequest.getCustomerFirstName())
-                .customerLastName(customerSearchRequest.getCustomerLastName())
-                .customerPhoneNumber(customerSearchRequest.getCustomerPhoneNumber())
+                .customerFirstName(name)
+                .customerLastName(surname)
+                .customerPhoneNumber(phone)
                 .build())
         );
     }
@@ -71,10 +72,8 @@ public class OrderService {
         }
     }
 
-    private void validateRequest(CustomerSearchRequest customerSearchRequest) {
-        if (StringUtils.isBlank(customerSearchRequest.getCustomerFirstName()) &&
-                StringUtils.isBlank(customerSearchRequest.getCustomerFirstName()) &&
-                StringUtils.isBlank(customerSearchRequest.getCustomerFirstName())) {
+    private void validateRequest(String name, String surname, String phone) {
+        if (StringUtils.isBlank(name) && StringUtils.isBlank(surname) && StringUtils.isBlank(phone)) {
             throw new IllegalArgumentException("No search arguments were provided");
         }
     }
