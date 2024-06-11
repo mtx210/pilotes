@@ -1,5 +1,5 @@
-## Summary
-
-TUI DX Backend technical Test v2
-
-The base project uses lombok, so you have to install it. You can use the following guide https://www.baeldung.com/lombok-ide
+# Prerequisites
+* it is assumed that this project is made for a small local restaurant
+therefore entity modeling involved creating a delivery address model
+where only street, building and apartment number is required as usually
+restaurant deliveries work within a certain city only
