@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "cf6ffb74-0076-4e09-a33e-59202a75d78e",
+		"name": "Pilotes REST collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10010882"
+	},
+	"item": [
+		{
+			"name": "get orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/order?name=john",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"order"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "john"
+						},
+						{
+							"key": "surname",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "phone",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pilotesAmount\": \"10\",\r\n    \"customerFirstName\": \"john\",\r\n    \"customerLastName\": \"koval\",\r\n    \"customerPhoneNumber\": \"123123123\",\r\n    \"deliveryAddressStreet\": \"sunny\",\r\n    \"deliveryAddressBuilding\": \"11\",\r\n    \"deliveryAddressApartment\": \"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update order",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pilotesAmount\": \"15\",\r\n    \"customerFirstName\": \"\",\r\n    \"customerLastName\": \"\",\r\n    \"customerPhoneNumber\": \"\",\r\n    \"deliveryAddressStreet\": \"\",\r\n    \"deliveryAddressBuilding\": \"\",\r\n    \"deliveryAddressApartment\": \"3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/order/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"order",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
