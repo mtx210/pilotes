@@ -67,7 +67,7 @@ public class OrderService {
     }
 
     private void validateRequest(OrderRequest orderRequest) {
-        if (!ALLOWED_PILOTES_AMOUNT_TYPE_MAP.containsKey(orderRequest.getPilotesAmount())) {
+        if (orderRequest.getPilotesAmount() != null && !ALLOWED_PILOTES_AMOUNT_TYPE_MAP.containsKey(orderRequest.getPilotesAmount())) {
             throw new IllegalArgumentException("Invalid pilotes amount");
         }
     }
@@ -102,6 +102,7 @@ public class OrderService {
         return BigDecimal.valueOf(pilotesPrice).multiply(BigDecimal.valueOf(pilotesAmount));
     }
 
+    // TODO
     private void updateEntity(Order entity, OrderRequest request) {
         if (request.getPilotesAmount() != null) {
             entity.setOrderContent(ALLOWED_PILOTES_AMOUNT_TYPE_MAP.get(request.getPilotesAmount()));

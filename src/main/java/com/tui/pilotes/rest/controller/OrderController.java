@@ -5,6 +5,8 @@ import com.tui.pilotes.rest.dto.request.OrderRequest;
 import com.tui.pilotes.rest.dto.response.CreateOrderResponse;
 import com.tui.pilotes.rest.dto.response.UpdateOrderResponse;
 import com.tui.pilotes.service.OrderService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,7 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<CreateOrderResponse> createOrder(
-            @RequestBody OrderRequest orderRequest
+            @RequestBody @Valid OrderRequest orderRequest
     ) {
         return new ResponseEntity<>(
                 orderService.createOrder(orderRequest),
@@ -31,7 +33,7 @@ public class OrderController {
 
     @PatchMapping("/{orderId}")
     public ResponseEntity<UpdateOrderResponse> updateOrder(
-            @PathVariable Long orderId,
+            @PathVariable @NotNull Long orderId,
             @RequestBody OrderRequest orderRequest
     ) {
         return new ResponseEntity<>(
