@@ -12,7 +12,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/order?name=john",
+					"raw": "http://localhost:8080/api/order",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -25,16 +25,17 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "john"
+							"value": "john",
+							"disabled": true
 						},
 						{
 							"key": "surname",
-							"value": null,
+							"value": "koval",
 							"disabled": true
 						},
 						{
 							"key": "phone",
-							"value": null,
+							"value": "789456123",
 							"disabled": true
 						}
 					]
@@ -49,7 +50,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"pilotesAmount\": \"10\",\r\n    \"customerFirstName\": \"john\",\r\n    \"customerLastName\": \"koval\",\r\n    \"customerPhoneNumber\": \"123123123\",\r\n    \"deliveryAddressStreet\": \"sunny\",\r\n    \"deliveryAddressBuilding\": \"11\",\r\n    \"deliveryAddressApartment\": \"2\"\r\n}",
+					"raw": "{\r\n    \"pilotesAmount\": 10,\r\n    \"customerFirstName\": \"john\",\r\n    \"customerLastName\": \"koval\",\r\n    \"customerPhoneNumber\": \"123123123\",\r\n    \"deliveryAddressStreet\": \"sunny\",\r\n    \"deliveryAddressBuilding\": \"11\",\r\n    \"deliveryAddressApartment\": \"2\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -78,7 +79,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"pilotesAmount\": \"15\",\r\n    \"customerFirstName\": \"\",\r\n    \"customerLastName\": \"\",\r\n    \"customerPhoneNumber\": \"\",\r\n    \"deliveryAddressStreet\": \"\",\r\n    \"deliveryAddressBuilding\": \"\",\r\n    \"deliveryAddressApartment\": \"3\"\r\n}",
+					"raw": "{\r\n    \"pilotesAmount\": 15,\r\n    \"customerFirstName\": \"\",\r\n    \"customerLastName\": \"\",\r\n    \"customerPhoneNumber\": \"\",\r\n    \"deliveryAddressStreet\": \"\",\r\n    \"deliveryAddressBuilding\": \"\",\r\n    \"deliveryAddressApartment\": \"3\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

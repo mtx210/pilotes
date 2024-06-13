@@ -3,5 +3,6 @@ services:
   pilotes-rest-service:
     container_name: pilotes-rest-service
     build: .
+    image: pilotes-rest-service
     ports:
       - "8080:8080"
