@@ -1,6 +1,5 @@
 package com.tui.pilotes.data.entity;
 
-import com.tui.pilotes.model.OrderType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +20,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderId;
-    private OrderType orderContent;
+    private String orderContent;
     private BigDecimal orderTotal;
     private LocalDateTime createDate;
     private String customerFirstName;

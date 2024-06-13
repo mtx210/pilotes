@@ -5,8 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class CreateOrderResponse {
+public class ApiErrorResponse { //TODO
 
-    private final String message = "order created!";
-    private final Long orderId;
+    private final String errorReason;
 }

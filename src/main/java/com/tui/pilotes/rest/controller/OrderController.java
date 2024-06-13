@@ -44,9 +44,9 @@ public class OrderController {
 
     @GetMapping
     public List<Order> getOrders(
-            @RequestParam String name,
-            @RequestParam String surname,
-            @RequestParam String phone
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String surname,
+            @RequestParam(required = false) String phone
     ) {
         return orderService.getOrders(name, surname, phone);
     }

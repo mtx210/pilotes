@@ -5,5 +5,5 @@ import lombok.Getter;
 @Getter
 public class UpdateOrderResponse {
 
-    private final String message = "Order updated!";
+    private final String message = "order updated!";
 }

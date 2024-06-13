@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -25,13 +26,19 @@ import java.util.Map;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final Map<Integer, OrderType> ALLOWED_PILOTES_AMOUNT_TYPE_MAP = Map.of(
+    @Value("${order.single-pilotes-price}")
+    private double pilotesPrice;
+    @Value("${order.update-time-threshold-minutes}")
+    private int updateTimeThresholdMinutes;
+    private static final Map<Integer, OrderType> ALLOWED_PILOTES_AMOUNT_TYPE_MAP = Map.of(
             5, OrderType.PILOTES_5,
             10, OrderType.PILOTES_10,
             15, OrderType.PILOTES_15
     );
-    @Value("${order.single-pilotes-price}")
-    private double pilotesPrice;
+    private static final ExampleMatcher SEARCH_MATCHER = ExampleMatcher.matchingAll()
+            .withMatcher("customerFirstName", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+            .withMatcher("customerLastName", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+            .withMatcher("customerPhoneNumber", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
 
     public CreateOrderResponse createOrder(OrderRequest orderRequest) {
         validateRequest(orderRequest);
@@ -44,7 +51,7 @@ public class OrderService {
         validateRequest(orderRequest);
 
         Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new IllegalArgumentException("Order not found!"));
+                .orElseThrow(() -> new IllegalArgumentException("order not found!"));
 
         if (!canUpdateOrder(order.getCreateDate())) {
             throw new OrderUpdateTimedOutException();
@@ -62,19 +69,19 @@ public class OrderService {
                 .customerFirstName(name)
                 .customerLastName(surname)
                 .customerPhoneNumber(phone)
-                .build())
+                .build(), SEARCH_MATCHER)
         );
     }
 
     private void validateRequest(OrderRequest orderRequest) {
         if (orderRequest.getPilotesAmount() != null && !ALLOWED_PILOTES_AMOUNT_TYPE_MAP.containsKey(orderRequest.getPilotesAmount())) {
-            throw new IllegalArgumentException("Invalid pilotes amount");
+            throw new IllegalArgumentException("invalid pilotes amount, accepted values: 5, 10, 15");
         }
     }
 
     private void validateRequest(String name, String surname, String phone) {
         if (StringUtils.isBlank(name) && StringUtils.isBlank(surname) && StringUtils.isBlank(phone)) {
-            throw new IllegalArgumentException("No search arguments were provided");
+            throw new IllegalArgumentException("no search arguments were provided");
         }
     }
 
@@ -82,7 +89,7 @@ public class OrderService {
         int pilotesAmount = request.getPilotesAmount();
 
         return Order.builder()
-                .orderContent(ALLOWED_PILOTES_AMOUNT_TYPE_MAP.get(pilotesAmount))
+                .orderContent(ALLOWED_PILOTES_AMOUNT_TYPE_MAP.get(pilotesAmount).getName())
                 .orderTotal(getOrderTotal(pilotesAmount))
                 .createDate(LocalDateTime.now())
                 .customerFirstName(request.getCustomerFirstName())
@@ -95,7 +102,7 @@ public class OrderService {
     }
 
     private boolean canUpdateOrder(LocalDateTime orderCreateDate) {
-        return orderCreateDate.plusMinutes(5).isAfter(LocalDateTime.now());
+        return orderCreateDate.plusMinutes(updateTimeThresholdMinutes).isAfter(LocalDateTime.now());
     }
 
     private BigDecimal getOrderTotal(int pilotesAmount) {
@@ -105,25 +112,25 @@ public class OrderService {
     // TODO
     private void updateEntity(Order entity, OrderRequest request) {
         if (request.getPilotesAmount() != null) {
-            entity.setOrderContent(ALLOWED_PILOTES_AMOUNT_TYPE_MAP.get(request.getPilotesAmount()));
+            entity.setOrderContent(ALLOWED_PILOTES_AMOUNT_TYPE_MAP.get(request.getPilotesAmount()).getName());
             entity.setOrderTotal(getOrderTotal(request.getPilotesAmount()));
         }
-        if (request.getCustomerFirstName() != null) {
+        if (StringUtils.isNotBlank(request.getCustomerFirstName())) {
             entity.setCustomerFirstName(request.getCustomerFirstName());
         }
-        if (request.getCustomerLastName() != null) {
+        if (StringUtils.isNotBlank(request.getCustomerLastName())) {
             entity.setCustomerLastName(request.getCustomerLastName());
         }
-        if (request.getCustomerPhoneNumber() != null) {
+        if (StringUtils.isNotBlank(request.getCustomerPhoneNumber())) {
             entity.setCustomerPhoneNumber(request.getCustomerPhoneNumber());
         }
-        if (request.getDeliveryAddressStreet() != null) {
+        if (StringUtils.isNotBlank(request.getDeliveryAddressStreet())) {
             entity.setDeliveryAddressStreet(request.getDeliveryAddressStreet());
         }
-        if (request.getDeliveryAddressBuilding() != null) {
+        if (StringUtils.isNotBlank(request.getDeliveryAddressBuilding())) {
             entity.setDeliveryAddressBuilding(request.getDeliveryAddressBuilding());
         }
-        if (request.getDeliveryAddressApartment() != null) {
+        if (StringUtils.isNotBlank(request.getDeliveryAddressApartment())) {
             entity.setDeliveryAddressApartment(request.getDeliveryAddressApartment());
         }
     }
