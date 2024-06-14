@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class ApiErrorResponse { //TODO
+public class ApiErrorResponse {
 
     private final String errorReason;
 }
