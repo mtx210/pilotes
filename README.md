@@ -26,6 +26,9 @@ when running from intellij, pass `-Dapikey=any-value` VM option
 ### 3.2. From Docker
 make sure to check `-Dapikey=any-value` VM option in Dockerfile
 
+### 3.3. Running tests
+add -Duser.country=US -Duser.language=en
+
 # 4. Additional 
 
 ### 4.1. Swagger API docs

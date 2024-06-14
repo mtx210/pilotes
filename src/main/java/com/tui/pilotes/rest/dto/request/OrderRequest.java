@@ -3,14 +3,14 @@ package com.tui.pilotes.rest.dto.request;
 import com.tui.pilotes.rest.SpecificIntegerValue;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class OrderRequest {
 
     @NotNull
