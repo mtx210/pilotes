@@ -20,10 +20,11 @@ data volume applications
 
 # 3. Running project
 
-when running from intellij, pass this VM option:
-```
--Dapikey=value
-```
+### 3.1. From IntelliJ IDE
+when running from intellij, pass `-Dapikey=any-value` VM option
+
+### 3.2. From Docker
+make sure to check `-Dapikey=any-value` VM option in Dockerfile
 
 # 4. Additional 
 
@@ -32,4 +33,9 @@ when running from intellij, pass this VM option:
 http://localhost:8080/api-docs
 http://localhost:8080/api-docs.yaml
 http://localhost:8080/swagger-ui/index.html
+```
+
+### 4.2. Postman testing collection
+```
+/root/pilotes_rest.postman.collection.json
 ```
