@@ -29,3 +29,6 @@ server:
 order:
   single-pilotes-price: 1.33
   update-time-threshold-minutes: 5
+
+rest:
+  api-key: ${apikey}
