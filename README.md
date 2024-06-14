@@ -16,7 +16,10 @@ data volume applications
 
 # 2. Project description
 
+This project is the finest cutting-edge technology backbone of a big enterprise which is
+the Michelin tier pilotes restaurant by The Great Miquel Montoro.
 
+[![The legend himself](https://img.youtube.com/vi/x6rwedEIMMc/0.jpg)](https://www.youtube.com/watch?v=x6rwedEIMMc)
 
 # 3. Running project
 
@@ -27,7 +30,7 @@ when running from intellij, pass `-Dapikey=any-value` VM option
 make sure to check `-Dapikey=any-value` VM option in Dockerfile
 
 ### 3.3. Running tests
-add -Duser.country=US -Duser.language=en
+add `-Duser.country=US -Duser.language=en` because of H2 locale auto configuration from OS
 
 # 4. Additional 
 
